@@ -1,1 +1,9 @@
+const readline=require('readline');const rl=readline.createInterface({input:process.stdin,output:process.stdout});
+let employees=[];
+function menu(){console.log('\n1.Add Employee\n2.List Employees\n3.Remove Employee\n4.Exit');
+rl.question('Choose an option: ',opt=>{if(opt==='1')addEmployee();else if(opt==='2')listEmployees();else if(opt==='3')removeEmployee();else if(opt==='4'){console.log('Exiting...');rl.close();}else{console.log('Invalid option');menu();}});}
+function addEmployee(){rl.question('Enter Employee Name: ',name=>{rl.question('Enter Employee ID: ',id=>{employees.push({id,name});console.log('Employee added successfully');menu();});});}
+function listEmployees(){if(employees.length===0)console.log('No employees found');else employees.forEach(e=>console.log(`ID: ${e.id}, Name: ${e.name}`));menu();}
+function removeEmployee(){rl.question('Enter Employee ID to remove: ',id=>{const i=employees.findIndex(e=>e.id===id);if(i===-1)console.log('Employee not found');else{employees.splice(i,1);console.log('Employee removed successfully');}menu();});}
+menu();
 
